@@ -33,10 +33,7 @@ class Team(Resource):
         print(data['location'])
         new_team = TeamModel(business_name, data['location'])
 
-        try:
-            new_team.save_to_db()
-        except:
-            return{"message": "An error happened inserting the team."}, 500
+        new_team.save_to_db()
 
         return new_team.json(), 201  # 201 status code means created
 

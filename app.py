@@ -9,7 +9,7 @@ from resources.invoice import Invoice, InvoiceList
 from resources.team import Team, TeamList
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pop-lockers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "hello"
 api = Api(app)

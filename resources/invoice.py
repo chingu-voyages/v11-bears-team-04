@@ -83,10 +83,7 @@ class Invoice(Resource):
         data = Invoice.parser.parse_args()
         new_invoice = InvoiceModel(**data)
 
-        try:
-            new_invoice.save_to_db()
-        except:
-            return{"message": "An error happened inserting the invoice."}, 500
+        new_invoice.save_to_db()
 
         return new_invoice.json(), 201  # 201 status code means created
 
