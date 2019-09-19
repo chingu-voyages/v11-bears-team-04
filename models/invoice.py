@@ -1,14 +1,15 @@
 from db import db
-
+import datetime
+import json
 
 class InvoiceModel(db.Model):
 
-    __tablename__ = 'items'
+    __tablename__ = 'invoices'
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(80))
-    phone_number = db.Column(db.String(80)) 
+    phone_number = db.Column(db.String(14)) 
     amount = db.Column(db.Integer)
-    date = db.Column(DateTime(timezone=True), server_default=func.now())
+    date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     make = db.Column(db.String(80))
     model = db.Column(db.String(80))
     year = db.Column(db.Integer)
@@ -18,8 +19,8 @@ class InvoiceModel(db.Model):
     license_state = db.Column(db.String(10))
     plate_state = db.Column(db.String(10))
 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('UserModel')
+    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    # user = db.relationship('UserModel')
 
     def __init__(self, address, phone_number, amount, date, make, model, year, color, license_plate_number, drivers_license_number, license_state, plate_state):
         self.address = address
@@ -36,9 +37,9 @@ class InvoiceModel(db.Model):
         self.plate_state = plate_state
 
     def json(self):
-        return {
+        invoice_dict = {
             'address': self.address,
-            'phone': self.phone_number,
+            'phone_number': self.phone_number,
             'amount': self.amount,
             'date': self.date,
             'make': self.make,
@@ -48,8 +49,11 @@ class InvoiceModel(db.Model):
             'license_plate_number': self.license_plate_number,
             'drivers_license_number': self.drivers_license_number,
             'license_state': self.license_state,
-            'plate_state' = self.plate_state
+            'plate_state': self.plate_state,
+            'date': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S:%f")
         }
+        
+        return invoice_dict
 
     @classmethod
     def find_by_id(cls, _id):

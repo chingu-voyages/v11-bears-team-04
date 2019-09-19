@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_jwt import jwt_required
 from models.invoice import InvoiceModel
+import datetime
 
 
 class Invoice(Resource):
@@ -22,8 +23,8 @@ class Invoice(Resource):
         help="Amount cannot be left blank"
     )
     parser.add_argument('date',
-        type='date', type=lambda s: datetime.datetime.strptime(s, '%Y-%m-%d'),
-        required=True,
+        type=lambda s: datetime.datetime.strptime(s, '%Y-%m-%d'),
+        required=False,
         help="Date cannot be left blank"
     )
     parser.add_argument('make',
@@ -67,54 +68,62 @@ class Invoice(Resource):
         help="Plate state cannot be left blank"
     )
 
-    @jwt_required()
-    def get(self, id):
-        item = InvoiceModel.find_by_id(id)
-        if item:
-            return item.json()
-        return {'message': 'Item not found'}, 404
+    # @jwt_required()
+    def get(self, _id):
+        invoice = InvoiceModel.find_by_id(_id)
+        if invoice:
+            return invoice.json()
+        return {'message': 'Invoice not found'}, 404
 
     # @jwt_required()
-    def post(self, id):
-        if InvoiceModel.find_by_id(id):
-            return {'message': "An item with name '{}' already exists.".format(name)}, 400
+    def post(self, _id):
+        if InvoiceModel.find_by_id(_id):
+            return {'message': "That invoice already exists!"}
 
-        data = Item.parser.parse_args()
-
-        # request_data = request.get_json() # you don't need content-type header with force=True
-        new_item = InvoiceModel(name, data['price'], data['store_id'])
+        data = Invoice.parser.parse_args()
+        new_invoice = InvoiceModel(**data)
 
         try:
-            new_item.save_to_db()
+            new_invoice.save_to_db()
         except:
-            return{"message": "An error happened inserting the item."}, 500
+            return{"message": "An error happened inserting the invoice."}, 500
 
-        return new_item.json(), 201  # 201 status code means created
+        return new_invoice.json(), 201  # 201 status code means created
 
-    def put(self, id):
-        data = Item.parser.parse_args()
+    def put(self, _id):
+        data = Invoice.parser.parse_args()
 
-        item = InvoiceModel.find_by_id(id)
+        invoice = InvoiceModel.find_by_id(_id)
 
-        if item is None:
-            # item = InvoiceModel(name, data['price'], data['store_id'])
-            item = InvoiceModel(name, **data)
+        if invoice is None:
+            # invoice = InvoiceModel(name, data['price'], data['store_id'])
+            invoice = InvoiceModel(**data)
         else:
-            item.price = data['price']
-            item.store_id = data['store_id']
+            invoice.address = data['address']
+            invoice.phone_number = data['phone_number']
+            invoice.amount = data['amount']
+            invoice.date = data['date']
+            invoice.make = data['make']
+            invoice.model = data['model']
+            invoice.year = data['year']
+            invoice.color = data['color']
+            invoice.license_plate_number = data['license_plate_number']
+            invoice.drivers_license_number = data['drivers_license_number']
+            invoice.license_state = data['license_state']
+            invoice.plate_state = data['plate_state']
 
-        item.save_to_db()
-        return item.json()
+        invoice.save_to_db()
+        return invoice.json()
 
-    def delete(self, id):
-        item = InvoiceModel.find_by_id(id)
-        if item:
-            item.delete_from_db()
+    def delete(self, _id):
+        invoice = InvoiceModel.find_by_id(_id)
+        if invoice:
+            invoice.delete_from_db()
 
-        return {'message': 'Item deleted'}
+        return {'message': 'invoice deleted'}
 
 
-class ItemList(Resource):
+class InvoiceList(Resource):
     def get(self):
-        return {'items': list(map(lambda item: item.json(), InvoiceModel.query.all()))}
-        # return {'items': [item.json() for item in InvoiceModel.query.all()]}
+        return {'invoices': list(map(lambda invoice: invoice.json(), InvoiceModel.query.all()))}
+        # return {'invoices': [invoice.json() for invoice in InvoiceModel.query.all()]}
