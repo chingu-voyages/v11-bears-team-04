@@ -14,7 +14,7 @@ class Team(Resource):
     parser.add_argument('location',
         type=str,
         required=True,
-        help="Location"
+        help="Location cannot be empty"
     )
 
     # @jwt_required()
@@ -30,7 +30,7 @@ class Team(Resource):
             return {'message': "That team already exists!"}
 
         data = Team.parser.parse_args()
-
+        print(data['location'])
         new_team = TeamModel(business_name, data['location'])
 
         try:

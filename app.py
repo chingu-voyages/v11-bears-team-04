@@ -35,4 +35,4 @@ if __name__ == '__main__':
     from db import db
     # this conditional will make sure this app.run only runs once
     db.init_app(app)
-    app.run(port=5000)  # Debug = True will display a site for debugging
+    app.run(port=5000, debug=True)  # Debug = True will display a site for debugging
