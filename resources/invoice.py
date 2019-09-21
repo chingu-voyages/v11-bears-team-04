@@ -67,6 +67,11 @@ class Invoice(Resource):
         required=True,
         help="Plate state cannot be left blank"
     )
+    parser.add_argument('user_id',
+        type=int,
+        required=True,
+        help="User ID cannot be left blank"
+    )
 
     # @jwt_required()
     def get(self, _id):
@@ -108,6 +113,7 @@ class Invoice(Resource):
             invoice.drivers_license_number = data['drivers_license_number']
             invoice.license_state = data['license_state']
             invoice.plate_state = data['plate_state']
+            invoice.user_id = data['user_id']
 
         invoice.save_to_db()
         return invoice.json()

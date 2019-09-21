@@ -19,10 +19,10 @@ class InvoiceModel(db.Model):
     license_state = db.Column(db.String(10))
     plate_state = db.Column(db.String(10))
 
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    # user = db.relationship('UserModel')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('UserModel')
 
-    def __init__(self, address, phone_number, amount, date, make, model, year, color, license_plate_number, drivers_license_number, license_state, plate_state):
+    def __init__(self, address, phone_number, amount, date, make, model, year, color, license_plate_number, drivers_license_number, license_state, plate_state, user_id):
         self.address = address
         self.phone_number = phone_number
         self.amount = amount
@@ -35,6 +35,7 @@ class InvoiceModel(db.Model):
         self.drivers_license_number = drivers_license_number
         self.license_state = license_state
         self.plate_state = plate_state
+        self.user_id = user_id
 
     def json(self):
         invoice_dict = {
@@ -50,7 +51,8 @@ class InvoiceModel(db.Model):
             'drivers_license_number': self.drivers_license_number,
             'license_state': self.license_state,
             'plate_state': self.plate_state,
-            'date': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S:%f")
+            'date': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S:%f"),
+            'user_id': self.user_id
         }
         
         return invoice_dict

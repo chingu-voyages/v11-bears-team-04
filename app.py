@@ -2,9 +2,9 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
 
-# from security import authenticate, identity
+from security import authenticate, identity
 
-# from resources.user import UserRegister, User, UserList
+from resources.user import UserRegister, User, UserList
 from resources.invoice import Invoice, InvoiceList
 from resources.team import Team, TeamList
 
@@ -20,13 +20,13 @@ def create_tables():
     db.create_all()
 
 
-# jwt = JWT(app, authenticate, identity)
+jwt = JWT(app, authenticate, identity)
 # api.add_resource(Invoice, '/invoice')
 api.add_resource(Invoice, '/invoice/<int:_id>')
 api.add_resource(InvoiceList, '/invoices')
-# api.add_resource(UserRegister, '/register')
-# api.add_resource(User, '/user/<string:username>')
-# api.add_resource(UserList, '/users')
+api.add_resource(UserRegister, '/register')
+api.add_resource(User, '/user/<string:username>')
+api.add_resource(UserList, '/users')
 api.add_resource(Team, '/team/<string:business_name>')
 api.add_resource(TeamList, '/teams')
 

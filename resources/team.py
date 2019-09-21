@@ -6,11 +6,6 @@ import datetime
 
 class Team(Resource):
     parser = reqparse.RequestParser()
-    # parser.add_argument('business_name',
-    #     type=str,
-    #     required=True,
-    #     help="Business name cannot be left blank"
-    # )
     parser.add_argument('location',
         type=str,
         required=True,
