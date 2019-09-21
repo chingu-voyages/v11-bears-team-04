@@ -89,9 +89,7 @@ class User(Resource):
         help="Phone cannot be blank."
     )
     parser.add_argument('team_id',
-        type=str,
-        required=True,
-        help="Team ID cannot be blank."
+        type=int,
     )
     parser.add_argument('admin',
         type=bool
