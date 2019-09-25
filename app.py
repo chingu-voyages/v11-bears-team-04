@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
+from flask_cors import CORS
 
 from security import authenticate, identity
 
@@ -11,6 +12,7 @@ from resources.team import Team, TeamList
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pop-lockers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+CORS(app)
 app.secret_key = "hello"
 api = Api(app)
 

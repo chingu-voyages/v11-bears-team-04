@@ -1,6 +1,5 @@
 from flask_restful import Resource, reqparse
 from models.user import UserModel
-import sqlite3
 
 
 class UserRegister(Resource):
@@ -50,7 +49,8 @@ class UserRegister(Resource):
         if UserModel.find_by_username(data['username']):
             return {"message": "A user with that username already exists"}, 400
 
-        user = UserModel(**data)  # same as data['username'], data['password']
+        user = UserModel(**data)
+        user.set_password(data['password'])  # same as data['username'], data['password']
         user.save_to_db()
 
         return {"message": "User created successfully"}, 201
@@ -89,9 +89,7 @@ class User(Resource):
         help="Phone cannot be blank."
     )
     parser.add_argument('team_id',
-        type=str,
-        required=True,
-        help="Team ID cannot be blank."
+        type=int,
     )
     parser.add_argument('admin',
         type=bool
@@ -115,6 +113,7 @@ class User(Resource):
         else:
             user.username = username
             user.password = data['password']
+            user.set_password(data['password'])
             user.first_name = data['first_name']
             user.last_name = data['last_name']
             user.email = data['email']
