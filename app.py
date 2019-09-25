@@ -10,7 +10,6 @@ from resources.invoice import Invoice, InvoiceList
 from resources.team import Team, TeamList
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pop-lockers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
