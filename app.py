@@ -1,12 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
-<<<<<<< HEAD
-from flask_cors import CORS, cross_origin
-
-=======
 from flask_cors import CORS
->>>>>>> c305aaec744961f8e01cfaf6ad2a119a29be4b07
 
 from security import authenticate, identity
 
@@ -18,8 +13,8 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pop-lockers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = "hello"
 CORS(app)
+app.secret_key = "hello"
 api = Api(app)
 
 
