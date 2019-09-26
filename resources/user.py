@@ -90,6 +90,8 @@ class User(Resource):
     )
     parser.add_argument('team_id',
         type=int,
+        required=True,
+        help="Team ID cannot be blank"
     )
     parser.add_argument('admin',
         type=bool

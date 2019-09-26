@@ -1,4 +1,5 @@
 from db import db
+# from app import ma
 
 class TeamModel(db.Model):
 
@@ -7,6 +8,8 @@ class TeamModel(db.Model):
     business_name = db.Column(db.String(80))
     location = db.Column(db.String(80))
 
+    users = db.relationship('UserModel', lazy='dynamic')
+
     def __init__(self, business_name, location):
         self.business_name = business_name
         self.location = location
@@ -14,7 +17,8 @@ class TeamModel(db.Model):
     def json(self):
         return {
             'business_name': self.business_name,
-            'location': self.location
+            'location': self.location,
+            'users': [user.json() for user in self.users.all()]
         }
         # return {'business_name': self.business_name, 'users': [item.json() for item in self.items.all()]}
 

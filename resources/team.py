@@ -3,7 +3,6 @@ from flask_jwt import jwt_required
 from models.team import TeamModel
 import datetime
 
-
 class Team(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('location',
@@ -17,6 +16,9 @@ class Team(Resource):
         team = TeamModel.find_by_business_name(business_name)
         if team:
             return team.json()
+            # Serialize the data for the response
+            # team_schema = TeamSchema(many=True)
+            # return team_schema.dump(team).data
         return {'message': 'team not found'}, 404
 
     # @jwt_required()
