@@ -3,6 +3,7 @@ from flask_restful import Api
 from flask_jwt import JWT
 from flask_cors import CORS
 
+from ma import ma
 from security import authenticate, identity
 
 from resources.user import UserRegister, User, UserList
@@ -35,6 +36,7 @@ api.add_resource(TeamList, '/teams')
 # Python assigns a name to the file you run in terminal (__main__)
 if __name__ == '__main__':
     from db import db
+    ma.init_app(app)
     # this conditional will make sure this app.run only runs once
     db.init_app(app)
     app.run(port=5000, debug=True)  # Debug = True will display a site for debugging
