@@ -13,8 +13,8 @@ from resources.team import Team, TeamList
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pop-lockers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = "hello"
 CORS(app)
+app.secret_key = "hello"
 api = Api(app)
 
 
