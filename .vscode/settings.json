@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "venv/bin/python"
+=======
+    "python.pythonPath": "venv/bin/python3"
+>>>>>>> develop
 }
