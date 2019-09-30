@@ -58,7 +58,6 @@ class Team(Resource):
 
 
 class TeamList(Resource):
-    @jwt_required()
     def get(self):
         return {'teams': list(map(lambda team: team.json(), TeamModel.query.all()))}
         # return {'teams': [team.json() for team in TeamModel.query.all()]}

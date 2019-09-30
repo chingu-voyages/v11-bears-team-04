@@ -1,7 +1,3 @@
 {
-<<<<<<< HEAD
-    "python.pythonPath": "venv/bin/python"
-=======
-    "python.pythonPath": "venv/bin/python3"
->>>>>>> develop
+    "python.pythonPath": "/Users/jtx007/.local/share/virtualenvs/v11-bears-team-04-RkzGToNd/bin/python"
 }

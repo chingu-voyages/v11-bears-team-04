@@ -11,6 +11,8 @@ flask-cors = "*"
 flask = "*"
 flask-jwt = "*"
 flask-restful = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"
