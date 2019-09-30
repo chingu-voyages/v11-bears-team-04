@@ -98,7 +98,6 @@ class Invoice(Resource):
         invoice = InvoiceModel.find_by_id(_id)
 
         if invoice is None:
-            # invoice = InvoiceModel(name, data['price'], data['store_id'])
             invoice = InvoiceModel(**data)
         else:
             invoice.address = data['address']
