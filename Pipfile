@@ -12,7 +12,10 @@ flask = "*"
 flask-jwt = "*"
 flask-restful = "*"
 flask-marshmallow = "*"
+<<<<<<< HEAD
 marshmallow-sqlalchemy = "*"
+=======
+>>>>>>> develop
 
 [requires]
 python_version = "3.7"
