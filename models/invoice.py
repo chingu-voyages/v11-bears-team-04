@@ -39,6 +39,7 @@ class InvoiceModel(db.Model):
 
     def json(self):
         invoice_dict = {
+            'id': self.id,
             'address': self.address,
             'phone_number': self.phone_number,
             'amount': self.amount,
