@@ -80,7 +80,7 @@ class Invoice(Resource):
             return invoice.json()
         return {'message': 'Invoice not found'}, 404
 
-    # @jwt_required()
+    # @jwt_required
     def post(self, _id):
         if InvoiceModel.find_by_id(_id):
             return {'message': "That invoice already exists!"}
