@@ -24,7 +24,6 @@ def create_tables():
 
 
 jwt = JWT(app, authenticate, identity)
-# api.add_resource(Invoice, '/invoice')
 api.add_resource(Invoice, '/invoice/<int:_id>')
 api.add_resource(InvoiceList, '/invoices')
 api.add_resource(UserRegister, '/register')
