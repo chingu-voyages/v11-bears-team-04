@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt import JWT
 from flask_cors import CORS
@@ -23,7 +23,7 @@ def create_tables():
     db.create_all()
 
 
-jwt = JWT(app, authenticate, identity)
+jwt = JWT(app, authenticate, identity, )
 api.add_resource(Invoice, '/invoice/<int:_id>')
 api.add_resource(InvoiceList, '/invoices')
 api.add_resource(UserRegister, '/register')
@@ -31,6 +31,13 @@ api.add_resource(User, '/user/<string:username>')
 api.add_resource(UserList, '/users')
 api.add_resource(Team, '/team/<string:business_name>')
 api.add_resource(TeamList, '/teams')
+
+@jwt.auth_response_handler
+def customized_response_handler(access_token, identity):
+    return jsonify({
+        'access_token': access_token.decode('utf-8'),
+        'user_id': identity.id
+    })
 
 # Python assigns a name to the file you run in terminal (__main__)
 if __name__ == '__main__':
