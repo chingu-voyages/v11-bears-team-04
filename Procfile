@@ -1,0 +1,1 @@
+web: gunicorn code/app:app --workers=4
