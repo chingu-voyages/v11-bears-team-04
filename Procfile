@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath code app:app --workers=4
+web: gunicorn --pythonpath code app:app
