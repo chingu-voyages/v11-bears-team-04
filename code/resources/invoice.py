@@ -18,7 +18,7 @@ class Invoice(Resource):
         help="Phone cannot be left blank"
     )
     parser.add_argument('amount',
-        type=int,
+        type=str,
         required=True,
         help="Amount cannot be left blank"
     )
@@ -38,7 +38,7 @@ class Invoice(Resource):
         help="Model cannot be left blank"
     )
     parser.add_argument('year',
-        type=int,
+        type=str,
         required=True,
         help="Year cannot be left blank"
     )
@@ -80,7 +80,7 @@ class Invoice(Resource):
             return invoice.json()
         return {'message': 'Invoice not found'}, 404
 
-    # @jwt_required()
+    # @jwt_required
     def post(self, _id):
         if InvoiceModel.find_by_id(_id):
             return {'message': "That invoice already exists!"}
@@ -98,7 +98,6 @@ class Invoice(Resource):
         invoice = InvoiceModel.find_by_id(_id)
 
         if invoice is None:
-            # invoice = InvoiceModel(name, data['price'], data['store_id'])
             invoice = InvoiceModel(**data)
         else:
             invoice.address = data['address']

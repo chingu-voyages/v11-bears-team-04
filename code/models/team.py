@@ -16,6 +16,7 @@ class TeamModel(db.Model):
 
     def json(self):
         return {
+            'id': self.id,
             'business_name': self.business_name,
             'location': self.location,
             'users': [user.json() for user in self.users.all()]
