@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt import JWT
 from flask_cors import CORS
+from db import db
 
 from ma import ma
 from security import authenticate, identity
@@ -41,7 +42,6 @@ def customized_response_handler(access_token, identity):
 
 # Python assigns a name to the file you run in terminal (__main__)
 if __name__ == '__main__':
-    from db import db
     ma.init_app(app)
     # this conditional will make sure this app.run only runs once
     db.init_app(app)
