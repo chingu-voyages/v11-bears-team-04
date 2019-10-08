@@ -18,6 +18,7 @@ CORS(app)
 app.secret_key = "hello"
 api = Api(app)
 
+db.init_app(app)
 
 @app.before_first_request
 def create_tables():
@@ -40,9 +41,9 @@ def customized_response_handler(access_token, identity):
         'user_id': identity.id
     })
 
+    
 # Python assigns a name to the file you run in terminal (__main__)
 if __name__ == '__main__':
     ma.init_app(app)
     # this conditional will make sure this app.run only runs once
-    db.init_app(app)
     app.run(port=8768, debug=True)  # Debug = True will display a site 4 debugging purposes
