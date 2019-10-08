@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT --pythonpath code/app:app
+web: gunicorn -b :$PORT --pythonpath code.wsgi.py
