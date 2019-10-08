@@ -11,7 +11,7 @@ from resources.invoice import Invoice, InvoiceList
 from resources.team import Team, TeamList
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pop-lockers'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:60a6111a8ade08958e1fb29440697522@dokku-postgres-pop-lockers:5432/pop_lockers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 app.secret_key = "hello"
@@ -45,4 +45,4 @@ if __name__ == '__main__':
     ma.init_app(app)
     # this conditional will make sure this app.run only runs once
     db.init_app(app)
-    app.run(port=5000, debug=True)  # Debug = True will display a site for debugging
+    app.run(port=8768, debug=True)  # Debug = True will display a site for debugging
