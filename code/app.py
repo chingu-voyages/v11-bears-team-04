@@ -3,8 +3,8 @@ from flask_restful import Api
 from flask_jwt import JWT
 from flask_cors import CORS
 
-from ma import ma
-from security import authenticate, identity
+from .ma import ma
+from .security import authenticate, identity
 
 from resources.user import UserRegister, User, UserList
 from resources.invoice import Invoice, InvoiceList
