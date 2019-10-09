@@ -4,7 +4,6 @@ from flask_jwt import JWT
 from flask_cors import CORS
 from db import db
 import os
-import psycopg2
 
 from ma import ma
 from security import authenticate, identity
@@ -13,11 +12,8 @@ from resources.user import UserRegister, User, UserList
 from resources.invoice import Invoice, InvoiceList
 from resources.team import Team, TeamList
 
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:60a6111a8ade08958e1fb29440697522@dokku-postgres-pop-lockers:5432/pop_lockers'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://localhost/pop-lockers')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 app.secret_key = "hello"
