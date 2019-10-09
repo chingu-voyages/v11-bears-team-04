@@ -46,4 +46,4 @@ def customized_response_handler(access_token, identity):
 if __name__ == '__main__':
     ma.init_app(app)
     # this conditional will make sure this app.run only runs once
-    app.run(port=8768, host="159.89.53.237" debug=True)  # Debug = True will display a site 4 debugging purposes
+    app.run(port=8768, host="159.89.53.237", debug=True)  # Debug = True will display a site 4 debugging purposes
