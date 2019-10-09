@@ -21,7 +21,7 @@ class Team(Resource):
             # return team_schema.dump(team).data
         return {'message': 'team not found'}, 404
 
-    @jwt_required()
+    # @jwt_required()
     def post(self, business_name):
         if TeamModel.find_by_business_name(business_name):
             return {'message': "That team already exists!"}
