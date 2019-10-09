@@ -6,9 +6,9 @@ from flask_cors import CORS
 from .ma import ma
 from .security import authenticate, identity
 
-from resources.user import UserRegister, User, UserList
-from resources.invoice import Invoice, InvoiceList
-from resources.team import Team, TeamList
+from .resources.user import UserRegister, User, UserList
+from .resources.invoice import Invoice, InvoiceList
+from .resources.team import Team, TeamList
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pop-lockers'

@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_jwt import jwt_required
-from models.invoice import InvoiceModel
+from ..models.invoice import InvoiceModel
 import datetime
 
 

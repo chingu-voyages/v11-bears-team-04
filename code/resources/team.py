@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_jwt import jwt_required
-from models.team import TeamModel
+from ..models.team import TeamModel
 import datetime
 
 class Team(Resource):

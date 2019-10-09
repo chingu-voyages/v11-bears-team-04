@@ -1,5 +1,4 @@
-from db import db
-# from app import ma
+from ..db import db
 
 class TeamModel(db.Model):
 
