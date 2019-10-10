@@ -18,7 +18,7 @@ class Invoice(Resource):
         help="Phone cannot be left blank"
     )
     parser.add_argument('amount',
-        type=str,
+        type=int,
         required=True,
         help="Amount cannot be left blank"
     )
@@ -38,7 +38,7 @@ class Invoice(Resource):
         help="Model cannot be left blank"
     )
     parser.add_argument('year',
-        type=str,
+        type=int,
         required=True,
         help="Year cannot be left blank"
     )
